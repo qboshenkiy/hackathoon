@@ -1,0 +1,99 @@
+/* Сброс стилей по умолчанию */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основной стиль для страницы */
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+/* Фоновое изображение и контейнер */
+.background-container {
+    background-image: url('../image/background.jpg'); /* Путь к изображению фона */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Контейнер для формы */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный белый фон */
+    padding: 50px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Заголовок */
+h1 {
+    font-size: 2em;
+    color: #d40000;
+    margin-bottom: 20px;
+}
+
+/* Стили для полей ввода */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+input:focus {
+    border-color: #d40000;
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 0, 0, 0.4);
+}
+
+/* Кнопка входа */
+.submit-btn {
+    background-color: #d40000;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #b30000;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 30px;
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+}

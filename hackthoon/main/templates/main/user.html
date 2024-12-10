@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск студентов</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Поиск студентов</h1>
+        <form method="get" action="{% url 'search_users' %}">
+            <!-- Поле для поиска по имени -->
+            <div class="form-group">
+                <label for="fio">Поиск по имени:</label>
+                <input type="text" id="fio" name="fio" placeholder="Введите ФИО" value="{{ request.GET.fio }}">
+            </div>
+
+            <!-- Поле для выбора курса -->
+            <div class="form-group">
+                <label for="course">Выбор курса:</label>
+                <select id="course" name="course">
+                    <option value="">-- Выберите курс --</option>
+                    <option value="Курс 1" {% if request.GET.course == 'Курс 1' %}selected{% endif %}>Курс 1</option>
+                    <option value="Курс 2" {% if request.GET.course == 'Курс 2' %}selected{% endif %}>Курс 2</option>
+                    <option value="Курс 3" {% if request.GET.course == 'Курс 3' %}selected{% endif %}>Курс 3</option>
+                    <option value="Курс 4" {% if request.GET.course == 'Курс 4' %}selected{% endif %}>Курс 4</option>
+                </select>
+            </div>
+
+            <!-- Поле для выбора группы -->
+            <div class="form-group">
+                <label for="group">Выбор группы:</label>
+                <select id="group" name="group">
+                    <option value="">-- Выберите группу --</option>
+                    <option value="ИВТ" {% if request.GET.group == 'ИВТ' %}selected{% endif %}>ИВТ</option>
+                    <option value="ИСИТ" {% if request.GET.group == 'ИСИТ' %}selected{% endif %}>ИСИТ</option>
+                    <option value="ТУР" {% if request.GET.group == 'ТУР' %}selected{% endif %}>ТУР</option>
+                    <option value="МЕН" {% if request.GET.group == 'МЕН' %}selected{% endif %}>МЕН</option>
+                </select>
+            </div>
+
+            <!-- Кнопка для отправки формы -->
+            <button type="submit" class="search-btn">Поиск</button>
+        </form>
+
+        <!-- Таблица для отображения результатов -->
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Курс</th>
+                    <th>Группа</th> 
+                    <th>Пропуски</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.Fio }}</td>
+                    <td>{{ user.group.course }}</td>
+                    <td>{{ user.group.title }}</td>
+                    <td>{{ user.absent_count }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Нет данных для отображения</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

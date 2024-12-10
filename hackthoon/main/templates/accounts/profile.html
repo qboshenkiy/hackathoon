@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Привет, {{ user.Fio }}</h1>
+    </header>
+    <div class="container">
+      <div class="flex">
+        <div class="profile">
+          <img
+            src="{% static 'image/noimage.jpg' %}"
+            alt="User Avatar"
+            class="avatar"
+          />
+          <div class="box-info">
+            <h3>{{ user.Fio }}</h3>
+            <p>Группа: {{ user.group.title }}</p>
+            <p>{{ user.group.course }}</p>
+            <p>Количество пропусков: {{ user.absent_count }}</p>
+            <p>Посещаемость: {{ user.attendance_percentage }}%</p>
+          </div>
+        </div>
+        <input type="hidden" id="user-id" value="{{ user.id }}" />
+        <input
+          type="hidden"
+          name="csrfmiddlewaretoken"
+          value="{{ csrf_token }}"
+        />
+
+        <div class="month-selector">
+          <label for="month">Выберите месяц:</label>
+          <select id="month">
+            <option value="september">Сентябрь</option>
+            <option value="october">Октябрь</option>
+            <option value="november">Ноябрь</option>
+            <option value="december">Декабрь</option>
+          </select>
+        </div>
+        <div class="attendance">
+          <p>Посещаемость:</p>
+          <div class="progress-circle">
+            <span>{{ user.attendance_percentage }}%</span>
+          </div>
+        </div>
+      </div>
+      <div id="calendar-container">
+        <!-- Календарь вставляется динамически -->
+      </div>
+    </div>
+    <input type="hidden" id="user-id" value="{{ user.id }}" />
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+      (function () {
+        const userId = document.getElementById("user-id").value;
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1; // JavaScript месяцы начинаются с 0
+        const day = today.getDate();
+
+        // Автоматическая отметка посещаемости
+        autoMarkAttendance(userId, year, month, day);
+      })();
+    </script>
+  </body>
+</html>

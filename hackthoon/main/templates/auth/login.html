@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="stylesheet" href="../../static/css/login.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="background-container">
+      <div class="login-container">
+        <h1>Вход</h1>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Логин:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Введите логин"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Введите пароль"
+            />
+          </div>
+          <button type="submit" class="submit-btn">Войти</button>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
